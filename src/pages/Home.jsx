@@ -1,10 +1,14 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import SearchForm from '../components/SearchForm';
-import WeatherCard from '../components/WeatherCard';
-import LoadingSpinner from '../components/LoadingSpinner';
-import ErrorMessage from '../components/ErrorMessage';
-import { fetchCurrentWeather, fetchWeatherByCoords, clearError } from '../features/weather/weatherSlice';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import SearchForm from "../components/SearchForm";
+import WeatherCard from "../components/WeatherCard";
+import LoadingSpinner from "../components/LoadingSpinner";
+import ErrorMessage from "../components/ErrorMessage";
+import {
+  fetchCurrentWeather,
+  fetchWeatherByCoords,
+  clearError,
+} from "../features/weather/weatherSlice";
 
 /**
  * Page Home
@@ -12,7 +16,9 @@ import { fetchCurrentWeather, fetchWeatherByCoords, clearError } from '../featur
  */
 const Home = () => {
   const dispatch = useDispatch();
-  const { currentWeather, loading, error } = useSelector((state) => state.weather);
+  const { currentWeather, loading, error } = useSelector(
+    (state) => state.weather,
+  );
 
   /**
    * Gère la recherche d'une ville
@@ -37,17 +43,17 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen py-8 px-4">
+    <div className="min-h-screen py-8 px-4 transition-colors">
       <div className="max-w-4xl mx-auto">
         {/* En-tête */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">
             🌍 WeatherTravel
           </h1>
-          <p className="text-xl text-gray-600 mb-2">
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-2">
             Planifiez vos voyages en fonction de la météo
           </p>
-          <p className="text-gray-500">
+          <p className="text-gray-500 dark:text-gray-400">
             Recherchez une ville pour consulter sa météo actuelle
           </p>
         </div>
@@ -85,10 +91,10 @@ const Home = () => {
           <div className="text-center">
             <div className="card max-w-2xl mx-auto">
               <div className="text-6xl mb-4">☀️🌧️❄️</div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
                 Commencez votre recherche
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-300">
                 Entrez le nom d'une ville pour découvrir sa météo actuelle et
                 planifier votre voyage en toute sérénité.
               </p>
@@ -100,22 +106,28 @@ const Home = () => {
         <div className="mt-12 grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           <div className="text-center p-6">
             <div className="text-4xl mb-3">🔍</div>
-            <h4 className="font-semibold text-gray-800 mb-2">Recherchez</h4>
-            <p className="text-sm text-gray-600">
+            <h4 className="font-semibold text-gray-800 dark:text-white mb-2">
+              Recherchez
+            </h4>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               Entrez le nom d'une ville pour consulter sa météo
             </p>
           </div>
           <div className="text-center p-6">
             <div className="text-4xl mb-3">⭐</div>
-            <h4 className="font-semibold text-gray-800 mb-2">Épinglez</h4>
-            <p className="text-sm text-gray-600">
+            <h4 className="font-semibold text-gray-800 dark:text-white mb-2">
+              Épinglez
+            </h4>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               Ajoutez vos destinations favorites à votre dashboard
             </p>
           </div>
           <div className="text-center p-6">
             <div className="text-4xl mb-3">✈️</div>
-            <h4 className="font-semibold text-gray-800 mb-2">Voyagez</h4>
-            <p className="text-sm text-gray-600">
+            <h4 className="font-semibold text-gray-800 dark:text-white mb-2">
+              Voyagez
+            </h4>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               Planifiez vos déplacements selon les conditions météo
             </p>
           </div>

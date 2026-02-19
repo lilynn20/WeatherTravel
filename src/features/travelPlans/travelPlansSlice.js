@@ -128,4 +128,13 @@ export const {
   resetEmailStatus,
 } = travelPlansSlice.actions;
 
+// Selectors
+export const selectAllTravelPlans = (state) => state.travelPlans.plans;
+export const selectTravelPlansLoading = (state) => state.travelPlans.loading;
+export const selectTravelPlansError = (state) => state.travelPlans.error;
+export const selectEmailSending = (state) => state.travelPlans.emailSending;
+export const selectEmailSent = (state) => state.travelPlans.emailSent;
+export const selectTravelPlanById = (state, planId) => 
+  state.travelPlans.plans.find(plan => plan.id === planId);
+
 export default travelPlansSlice.reducer;

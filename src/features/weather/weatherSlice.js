@@ -125,4 +125,12 @@ const weatherSlice = createSlice({
 });
 
 export const { clearError, resetWeather } = weatherSlice.actions;
+
+// Selectors
+export const selectCurrentWeather = (state) => state.weather.currentWeather;
+export const selectForecast = (state) => state.weather.forecast;
+export const selectWeatherLoading = (state) => state.weather.loading;
+export const selectWeatherError = (state) => state.weather.error;
+export const selectSearchedCity = (state) => state.weather.searchedCity;
+
 export default weatherSlice.reducer;

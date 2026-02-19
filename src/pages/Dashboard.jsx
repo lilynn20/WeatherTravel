@@ -64,16 +64,16 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen py-8 px-4">
+    <div className="min-h-screen py-8 px-4 transition-colors">
       <div className="max-w-7xl mx-auto">
         {/* En-tête */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
                 🗺️ Mon Tableau de Bord
               </h1>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-400">
                 Gérez vos destinations favorites et vos voyages planifiés
               </p>
             </div>
@@ -88,31 +88,31 @@ const Dashboard = () => {
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-4 border-b border-gray-200 mb-6">
+          <div className="flex gap-4 border-b border-gray-200 dark:border-gray-700 mb-6">
             <button
               onClick={() => setActiveTab('favorites')}
               className={`px-4 py-3 font-medium transition-colors relative ${
                 activeTab === 'favorites'
-                  ? 'text-blue-600'
-                  : 'text-gray-600 hover:text-gray-800'
+                  ? 'text-blue-600 dark:text-blue-400'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300'
               }`}
             >
               📌 Favoris ({favorites.length})
               {activeTab === 'favorites' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400"></div>
               )}
             </button>
             <button
               onClick={() => setActiveTab('plans')}
               className={`px-4 py-3 font-medium transition-colors relative ${
                 activeTab === 'plans'
-                  ? 'text-blue-600'
-                  : 'text-gray-600 hover:text-gray-800'
+                  ? 'text-blue-600 dark:text-blue-400'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300'
               }`}
             >
               ✈️ Voyages planifiés ({travelPlans.length})
               {activeTab === 'plans' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400"></div>
               )}
             </button>
           </div>
@@ -132,24 +132,24 @@ const Dashboard = () => {
               {/* Barre de statistiques favoris */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="card">
-                  <p className="text-sm text-gray-600 mb-1">Température moyenne</p>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Température moyenne</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white">
                     {Math.round(
                       favorites.reduce((acc, city) => acc + city.temp, 0) / favorites.length
                     )}°C
                   </p>
                 </div>
                 <div className="card">
-                  <p className="text-sm text-gray-600 mb-1">Ville la plus chaude</p>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Ville la plus chaude</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white">
                     {favorites.reduce((max, city) => 
                       city.temp > max.temp ? city : max
                     ).name}
                   </p>
                 </div>
                 <div className="card">
-                  <p className="text-sm text-gray-600 mb-1">Ville la plus froide</p>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Ville la plus froide</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white">
                     {favorites.reduce((min, city) => 
                       city.temp < min.temp ? city : min
                     ).name}
@@ -189,10 +189,10 @@ const Dashboard = () => {
             <div className="text-center py-16">
               <div className="card max-w-2xl mx-auto">
                 <div className="text-6xl mb-4">📍</div>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-3">
+                <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
                   Aucune ville épinglée
                 </h3>
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-600 dark:text-gray-400 mb-6">
                   Commencez par rechercher une ville et ajoutez-la à vos favoris
                   pour la retrouver ici facilement.
                 </p>
@@ -212,7 +212,7 @@ const Dashboard = () => {
               {/* Voyages à venir */}
               {futurePlans.length > 0 && (
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                     🚀 Voyages à venir ({futurePlans.length})
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -226,7 +226,7 @@ const Dashboard = () => {
               {/* Voyages passés */}
               {pastPlans.length > 0 && (
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-600 mb-4 flex items-center gap-2">
+                  <h2 className="text-2xl font-bold text-gray-600 dark:text-gray-400 mb-4 flex items-center gap-2">
                     📚 Voyages passés ({pastPlans.length})
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -242,10 +242,10 @@ const Dashboard = () => {
             <div className="text-center py-16">
               <div className="card max-w-2xl mx-auto">
                 <div className="text-6xl mb-4">✈️</div>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-3">
+                <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
                   Aucun voyage planifié
                 </h3>
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-600 dark:text-gray-400 mb-6">
                   Recherchez une ville et cliquez sur "Planifier un voyage" pour
                   ajouter une date de voyage et recevoir un rappel par email.
                 </p>
@@ -263,17 +263,17 @@ const Dashboard = () => {
         {/* Conseils */}
         {((activeTab === 'favorites' && favorites.length > 0) || 
           (activeTab === 'plans' && travelPlans.length > 0)) && (
-          <div className="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h4 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+          <div className="mt-12 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 transition-colors">
+            <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-2 flex items-center gap-2">
               💡 Conseil {activeTab === 'favorites' ? 'de voyage' : 'pour vos voyages'}
             </h4>
-            <p className="text-blue-800 text-sm">
+            <p className="text-blue-800 dark:text-blue-200 text-sm">
               {activeTab === 'favorites' 
                 ? 'Consultez les détails météo de chaque ville pour planifier au mieux vos déplacements. Les températures et conditions peuvent varier rapidement !'
                 : 'Vérifiez la météo quelques jours avant votre départ pour ajuster vos bagages. Les prévisions peuvent évoluer !'}
             </p>
           </div>
-        )}
+        )}}
       </div>
     </div>
   );

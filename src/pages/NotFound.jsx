@@ -9,7 +9,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 transition-colors">
       <div className="text-center max-w-2xl">
         {/* Animation météo */}
         <div className="mb-8 text-8xl animate-bounce">
@@ -17,11 +17,11 @@ const NotFound = () => {
         </div>
 
         {/* Message d'erreur */}
-        <h1 className="text-6xl font-bold text-gray-900 mb-4">404</h1>
-        <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+        <h1 className="text-6xl font-bold text-gray-900 dark:text-white mb-4">404</h1>
+        <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
           Page introuvable
         </h2>
-        <p className="text-xl text-gray-600 mb-8">
+        <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
           Oups ! Il semblerait que vous vous soyez perdu dans les nuages... ☁️
           <br />
           La page que vous recherchez n'existe pas ou a été déplacée.
@@ -33,25 +33,25 @@ const NotFound = () => {
             onClick={() => navigate('/')}
             className="btn-primary text-lg"
           >
-            🏠 Retour à l'accueil
+             Retour à l'accueil
           </button>
           <button
             onClick={() => navigate('/dashboard')}
             className="btn-secondary text-lg"
           >
-            📌 Mes destinations
+            Mes destinations
           </button>
         </div>
 
         {/* Suggestions */}
-        <div className="mt-12 p-6 bg-blue-50 rounded-lg border border-blue-200">
-          <h3 className="font-semibold text-blue-900 mb-3">
+        <div className="mt-12 p-6 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-200 dark:border-blue-800 transition-colors">
+          <h3 className="font-semibold text-blue-900 dark:text-blue-300 mb-3">
             Vous pourriez également :
           </h3>
-          <ul className="text-left text-blue-800 space-y-2">
-            <li>🔍 Rechercher une nouvelle ville</li>
-            <li>⭐ Consulter vos villes favorites</li>
-            <li>📊 Explorer les détails météo d'une destination</li>
+          <ul className="text-left text-blue-800 dark:text-blue-200 space-y-2">
+            <li>Rechercher une nouvelle ville</li>
+            <li>Consulter vos villes favorites</li>
+            <li>Explorer les détails météo d'une destination</li>
           </ul>
         </div>
 

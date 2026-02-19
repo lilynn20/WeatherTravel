@@ -10,6 +10,8 @@ import travelPlansReducer from '../features/travelPlans/travelPlansSlice';
  * - weather : gestion de la météo actuelle et des prévisions
  * - favorites : gestion des villes épinglées (persistées dans localStorage)
  * - travelPlans : gestion des plans de voyage avec dates et rappels email
+ * 
+ * Redux DevTools est activé en développement pour faciliter le débogage
  */
 export const store = configureStore({
   reducer: {
@@ -31,6 +33,14 @@ export const store = configureStore({
         ignoredPaths: ['favorites.cities', 'travelPlans.plans'],
       },
     }),
+  // Activer Redux DevTools en développement pour un meilleur débogage
+  devTools: {
+    actionSanitizer: (action) => ({
+      ...action,
+      type: action.type,
+    }),
+    stateSanitizer: (state) => state,
+  },
 });
 
 export default store;

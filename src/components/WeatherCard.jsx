@@ -86,10 +86,10 @@ const WeatherCard = ({ weatherData }) => {
         {/* En-tête */}
         <div className="flex justify-between items-start mb-6">
           <div>
-            <h2 className="text-3xl font-bold text-gray-800">
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
               {name}, {sys.country}
             </h2>
-            <p className="text-gray-600 mt-1 capitalize">
+            <p className="text-gray-600 dark:text-gray-400 mt-1 capitalize">
               {weather[0].description}
             </p>
           </div>
@@ -99,37 +99,37 @@ const WeatherCard = ({ weatherData }) => {
         {/* Température principale */}
         <div className="mb-6">
           <div className="flex items-baseline gap-2">
-            <span className="text-6xl font-bold text-gray-900">
+            <span className="text-6xl font-bold text-gray-900 dark:text-white">
               {temperature}°
             </span>
-            <span className="text-2xl text-gray-600">C</span>
+            <span className="text-2xl text-gray-600 dark:text-gray-400">C</span>
           </div>
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-600 dark:text-gray-400 mt-2">
             Ressenti : {feelsLike}°C
           </p>
         </div>
 
         {/* Informations détaillées */}
-        <div className="grid grid-cols-2 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
+        <div className="grid grid-cols-2 gap-4 mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg transition-colors">
           <div className="flex items-center gap-2">
             <span className="text-2xl">💧</span>
             <div>
-              <p className="text-sm text-gray-600">Humidité</p>
-              <p className="font-semibold">{main.humidity}%</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Humidité</p>
+              <p className="font-semibold text-gray-900 dark:text-white">{main.humidity}%</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-2xl">🌬️</span>
             <div>
-              <p className="text-sm text-gray-600">Vent</p>
-              <p className="font-semibold">{wind.speed} m/s</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Vent</p>
+              <p className="font-semibold text-gray-900 dark:text-white">{wind.speed} m/s</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-2xl">🌡️</span>
             <div>
-              <p className="text-sm text-gray-600">Min / Max</p>
-              <p className="font-semibold">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Min / Max</p>
+              <p className="font-semibold text-gray-900 dark:text-white">
                 {Math.round(main.temp_min)}° / {Math.round(main.temp_max)}°
               </p>
             </div>
@@ -137,8 +137,8 @@ const WeatherCard = ({ weatherData }) => {
           <div className="flex items-center gap-2">
             <span className="text-2xl">🔽</span>
             <div>
-              <p className="text-sm text-gray-600">Pression</p>
-              <p className="font-semibold">{main.pressure} hPa</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Pression</p>
+              <p className="font-semibold text-gray-900 dark:text-white">{main.pressure} hPa</p>
             </div>
           </div>
         </div>

@@ -155,7 +155,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto transition-colors">
         {/* En-tête */}
         <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-t-lg">
           <div className="flex justify-between items-start">
@@ -179,7 +179,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
           {/* Message de succès */}
           {showSuccess && (
-            <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex items-center">
+            <div className="bg-green-50 dark:bg-green-900 dark:bg-opacity-20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-300 px-4 py-3 rounded-lg flex items-center transition-colors">
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
@@ -191,14 +191,14 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
 
           {/* Message d'erreur */}
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
+            <div className="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300 px-4 py-3 rounded-lg transition-colors">
               <p className="text-sm">{error}</p>
             </div>
           )}
 
           {/* Date de voyage */}
           <div>
-            <label htmlFor="travelDate" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="travelDate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               📅 Date de voyage *
             </label>
             <input
@@ -209,31 +209,31 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
               onChange={handleChange}
               min={getMinDate()}
               max={getMaxDate()}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition ${
-                formErrors.travelDate ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                formErrors.travelDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
               }`}
               required
             />
             {formErrors.travelDate && (
-              <p className="text-red-500 text-sm mt-1">{formErrors.travelDate}</p>
+              <p className="text-red-500 dark:text-red-400 text-sm mt-1">{formErrors.travelDate}</p>
             )}
           </div>
 
           {/* Checkbox pour le rappel */}
-          <div className="bg-blue-50 p-4 rounded-lg">
+          <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-4 rounded-lg transition-colors">
             <label className="flex items-start cursor-pointer">
               <input
                 type="checkbox"
                 name="sendReminder"
                 checked={formData.sendReminder}
                 onChange={handleChange}
-                className="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                className="mt-1 h-4 w-4 text-blue-600 dark:text-blue-400 focus:ring-blue-500 border-gray-300 dark:border-gray-600 rounded"
               />
               <span className="ml-3">
-                <span className="block text-sm font-medium text-gray-900">
+                <span className="block text-sm font-medium text-gray-900 dark:text-white">
                   📧 Recevoir un rappel par email
                 </span>
-                <span className="block text-xs text-gray-600 mt-1">
+                <span className="block text-xs text-gray-600 dark:text-gray-400 mt-1">
                   Un email avec les informations météo et des conseils sera envoyé
                 </span>
               </span>
@@ -243,7 +243,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
           {/* Email (conditionnel) */}
           {formData.sendReminder && (
             <div className="animate-fadeIn">
-              <label htmlFor="userEmail" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="userEmail" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 ✉️ Votre email *
               </label>
               <input
@@ -253,15 +253,15 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
                 value={formData.userEmail}
                 onChange={handleChange}
                 placeholder="exemple@email.com"
-                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition ${
-                  formErrors.userEmail ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                  formErrors.userEmail ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                 }`}
                 required={formData.sendReminder}
               />
               {formErrors.userEmail && (
-                <p className="text-red-500 text-sm mt-1">{formErrors.userEmail}</p>
+                <p className="text-red-500 dark:text-red-400 text-sm mt-1">{formErrors.userEmail}</p>
               )}
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 L'email sera envoyé à cette adresse immédiatement
               </p>
             </div>
@@ -269,20 +269,20 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
 
           {/* Aperçu météo */}
           {cityData.weather && (
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border border-blue-100">
-              <h3 className="text-sm font-semibold text-gray-800 mb-2">🌤️ Météo actuelle</h3>
+            <div className="bg-gradient-to-r from-blue-50 dark:from-blue-900 dark:from-opacity-20 to-purple-50 dark:to-purple-900 dark:to-opacity-20 p-4 rounded-lg border border-blue-100 dark:border-blue-800 transition-colors">
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-white mb-2">🌤️ Météo actuelle</h3>
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div>
-                  <span className="text-gray-600">Température:</span>
-                  <span className="ml-2 font-medium">{Math.round(cityData.weather.temp)}°C</span>
+                  <span className="text-gray-600 dark:text-gray-400">Température:</span>
+                  <span className="ml-2 font-medium text-gray-900 dark:text-white">{Math.round(cityData.weather.temp)}°C</span>
                 </div>
                 <div>
-                  <span className="text-gray-600">Ressenti:</span>
-                  <span className="ml-2 font-medium">{Math.round(cityData.weather.feelsLike)}°C</span>
+                  <span className="text-gray-600 dark:text-gray-400">Ressenti:</span>
+                  <span className="ml-2 font-medium text-gray-900 dark:text-white">{Math.round(cityData.weather.feelsLike)}°C</span>
                 </div>
                 <div className="col-span-2">
-                  <span className="text-gray-600">Conditions:</span>
-                  <span className="ml-2 font-medium capitalize">{cityData.weather.description}</span>
+                  <span className="text-gray-600 dark:text-gray-400">Conditions:</span>
+                  <span className="ml-2 font-medium capitalize text-gray-900 dark:text-white">{cityData.weather.description}</span>
                 </div>
               </div>
             </div>
@@ -290,8 +290,8 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
 
           {/* Info sur l'ajout automatique aux favoris */}
           {!isFavorite && (
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
-              <p className="text-xs text-yellow-800">
+            <div className="bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3 transition-colors">
+              <p className="text-xs text-yellow-800 dark:text-yellow-300">
                 ⭐ Cette ville sera automatiquement ajoutée à vos destinations favorites
               </p>
             </div>
@@ -302,7 +302,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
             <button
               type="button"
               onClick={handleClose}
-              className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-medium"
+              className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-medium"
               disabled={emailSending}
             >
               Annuler

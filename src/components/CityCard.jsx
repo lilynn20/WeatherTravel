@@ -36,10 +36,10 @@ const CityCard = ({ city, onRemove }) => {
       {/* En-tête avec ville et pays */}
       <div className="flex justify-between items-start mb-4">
         <div className="flex-1">
-          <h3 className="text-xl font-bold text-gray-800">
+          <h3 className="text-xl font-bold text-gray-800 dark:text-white">
             {city.name}
           </h3>
-          <p className="text-sm text-gray-500">{city.country}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{city.country}</p>
         </div>
         <div className="text-4xl">{weatherIcon}</div>
       </div>
@@ -47,12 +47,12 @@ const CityCard = ({ city, onRemove }) => {
       {/* Température */}
       <div className="mb-4">
         <div className="flex items-baseline gap-1">
-          <span className="text-4xl font-bold text-gray-900">
+          <span className="text-4xl font-bold text-gray-900 dark:text-white">
             {Math.round(city.temp)}°
           </span>
-          <span className="text-lg text-gray-600">C</span>
+          <span className="text-lg text-gray-600 dark:text-gray-400">C</span>
         </div>
-        <p className="text-sm text-gray-600 capitalize mt-1">
+        <p className="text-sm text-gray-600 dark:text-gray-400 capitalize mt-1">
           {city.description}
         </p>
       </div>
@@ -61,16 +61,16 @@ const CityCard = ({ city, onRemove }) => {
       <div className="grid grid-cols-2 gap-2 mb-4 text-sm">
         <div className="flex items-center gap-1">
           <span>💧</span>
-          <span className="text-gray-600">{city.humidity}%</span>
+          <span className="text-gray-600 dark:text-gray-400">{city.humidity}%</span>
         </div>
         <div className="flex items-center gap-1">
           <span>🌬️</span>
-          <span className="text-gray-600">{city.windSpeed} m/s</span>
+          <span className="text-gray-600 dark:text-gray-400">{city.windSpeed} m/s</span>
         </div>
       </div>
 
       {/* Date d'ajout */}
-      <p className="text-xs text-gray-400 mb-4">
+      <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
         Ajouté le {formatDate(city.addedAt)}
       </p>
 

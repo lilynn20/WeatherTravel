@@ -12,11 +12,11 @@ const ErrorMessage = ({ error, onRetry }) => {
   const errorMessage = ERROR_MESSAGES[error] || error || ERROR_MESSAGES.GENERIC_ERROR;
 
   return (
-    <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-4">
+    <div className="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 border border-red-200 dark:border-red-800 rounded-lg p-6 mb-4 transition-colors">
       <div className="flex items-start">
         <div className="flex-shrink-0">
           <svg
-            className="h-6 w-6 text-red-400"
+            className="h-6 w-6 text-red-400 dark:text-red-600"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -30,8 +30,8 @@ const ErrorMessage = ({ error, onRetry }) => {
           </svg>
         </div>
         <div className="ml-3 flex-1">
-          <h3 className="text-sm font-medium text-red-800">Erreur</h3>
-          <div className="mt-2 text-sm text-red-700">
+          <h3 className="text-sm font-medium text-red-800 dark:text-red-300">Erreur</h3>
+          <div className="mt-2 text-sm text-red-700 dark:text-red-200">
             <p>{errorMessage}</p>
           </div>
           {onRetry && (

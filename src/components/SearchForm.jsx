@@ -81,7 +81,7 @@ const SearchForm = ({ onSearch, loading = false }) => {
               aria-label="Nom de la ville"
             />
             {error && (
-              <p className="text-red-500 text-sm mt-2">{error}</p>
+              <p className="text-red-500 dark:text-red-400 text-sm mt-2">{error}</p>
             )}
           </div>
           <button
