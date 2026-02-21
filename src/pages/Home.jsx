@@ -43,7 +43,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen py-8 px-4 transition-colors">
+    <div className="min-h-screen py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* En-tête */}
         <div className="text-center mb-12">

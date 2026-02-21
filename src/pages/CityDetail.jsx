@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentWeather, fetchForecast } from '../features/weather/weatherSlice';
 import { addCity, selectIsFavorite } from '../features/favorites/favoritesSlice';
+import { addNotification } from '../features/notifications/notificationsSlice';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
 import { WEATHER_ICONS } from '../utils/constants';
@@ -46,6 +47,11 @@ const CityDetail = () => {
         windSpeed: currentWeather.wind.speed,
       };
       dispatch(addCity(cityData));
+      dispatch(
+        addNotification({
+          message: `${currentWeather.name} ajoutée aux destinations avec succès.`,
+        })
+      );
     }
   };
 
@@ -104,7 +110,7 @@ const CityDetail = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen py-8 px-4 transition-colors">
+        <div className="min-h-screen py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <ErrorMessage 
             error={error} 
@@ -129,7 +135,7 @@ const CityDetail = () => {
   const dailyForecasts = getDailyForecasts();
 
   return (
-    <div className="min-h-screen py-8 px-4 transition-colors">
+    <div className="min-h-screen py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Bouton retour */}
         <button
@@ -178,36 +184,36 @@ const CityDetail = () => {
 
             {/* Colonne droite - Détails */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg transition-colors">
+                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                 <div className="text-3xl mb-2">🌡️</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Min / Max</p>
                 <p className="text-xl font-bold text-gray-900 dark:text-white">
                   {Math.round(currentWeather.main.temp_min)}° / {Math.round(currentWeather.main.temp_max)}°
                 </p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg transition-colors">
+                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                 <div className="text-3xl mb-2">💧</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Humidité</p>
                 <p className="text-xl font-bold text-gray-900 dark:text-white">{currentWeather.main.humidity}%</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg transition-colors">
+                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                 <div className="text-3xl mb-2">🌬️</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Vent</p>
                 <p className="text-xl font-bold text-gray-900 dark:text-white">{currentWeather.wind.speed} m/s</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg transition-colors">
+                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                 <div className="text-3xl mb-2">🔽</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Pression</p>
                 <p className="text-xl font-bold text-gray-900 dark:text-white">{currentWeather.main.pressure} hPa</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg transition-colors">
+                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                 <div className="text-3xl mb-2">👁️</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Visibilité</p>
                 <p className="text-xl font-bold text-gray-900 dark:text-white">
                   {currentWeather.visibility ? `${currentWeather.visibility / 1000} km` : 'N/A'}
                 </p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg transition-colors">
+                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                 <div className="text-3xl mb-2">☁️</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Nébulosité</p>
                 <p className="text-xl font-bold text-gray-900 dark:text-white">{currentWeather.clouds.all}%</p>
@@ -228,7 +234,7 @@ const CityDetail = () => {
                 return (
                   <div
                     key={day.dt}
-                    className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-center hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+                    className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg text-center hover:bg-gray-100 dark:hover:bg-gray-600"
                   >
                     <p className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
                       {formatDate(day.dt)}

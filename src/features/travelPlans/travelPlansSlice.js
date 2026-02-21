@@ -60,6 +60,7 @@ const travelPlansSlice = createSlice({
         userEmail: action.payload.userEmail,
         weatherInfo: action.payload.weatherInfo,
         reminderSent: false,
+        toastReminderSent: false,
         createdAt: new Date().toISOString(),
       };
       state.plans.push(newPlan);
@@ -77,6 +78,15 @@ const travelPlansSlice = createSlice({
       const plan = state.plans.find(p => p.id === action.payload);
       if (plan) {
         plan.reminderSent = true;
+        saveTravelPlansToStorage(state.plans);
+      }
+    },
+
+    // Marquer le rappel toast comme envoye
+    markToastReminderSent: (state, action) => {
+      const plan = state.plans.find(p => p.id === action.payload);
+      if (plan) {
+        plan.toastReminderSent = true;
         saveTravelPlansToStorage(state.plans);
       }
     },
@@ -123,6 +133,7 @@ export const {
   addTravelPlan,
   removeTravelPlan,
   markReminderSent,
+  markToastReminderSent,
   clearAllPlans,
   resetEmailStatus,
 } = travelPlansSlice.actions;

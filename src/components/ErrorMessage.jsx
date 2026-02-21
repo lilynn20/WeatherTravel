@@ -12,7 +12,7 @@ const ErrorMessage = ({ error, onRetry }) => {
   const errorMessage = ERROR_MESSAGES[error] || error || ERROR_MESSAGES.GENERIC_ERROR;
 
   return (
-    <div className="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 border border-red-200 dark:border-red-800 rounded-lg p-6 mb-4 transition-colors">
+    <div className="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 border border-red-200 dark:border-red-800 rounded-lg p-6 mb-4">
       <div className="flex items-start">
         <div className="flex-shrink-0">
           <svg

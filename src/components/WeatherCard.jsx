@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addCity, selectIsFavorite } from '../features/favorites/favoritesSlice';
+import { addNotification } from '../features/notifications/notificationsSlice';
 import { WEATHER_ICONS } from '../utils/constants';
 import TravelDateModal from './TravelDateModal';
 
@@ -50,6 +51,11 @@ const WeatherCard = ({ weatherData }) => {
       windSpeed: wind.speed,
     };
     dispatch(addCity(cityData));
+    dispatch(
+      addNotification({
+        message: `${name} ajoutée aux destinations avec succès.`,
+      })
+    );
   };
 
   /**
@@ -110,7 +116,7 @@ const WeatherCard = ({ weatherData }) => {
         </div>
 
         {/* Informations détaillées */}
-        <div className="grid grid-cols-2 gap-4 mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg transition-colors">
+        <div className="grid grid-cols-2 gap-4 mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
           <div className="flex items-center gap-2">
             <span className="text-2xl">💧</span>
             <div>

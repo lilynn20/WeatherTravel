@@ -9,7 +9,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 transition-colors">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <div className="text-center max-w-2xl">
         {/* Animation météo */}
         <div className="mb-8 text-8xl animate-bounce">
@@ -44,7 +44,7 @@ const NotFound = () => {
         </div>
 
         {/* Suggestions */}
-        <div className="mt-12 p-6 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-200 dark:border-blue-800 transition-colors">
+        <div className="mt-12 p-6 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 rounded-lg border border-blue-200 dark:border-blue-800">
           <h3 className="font-semibold text-blue-900 dark:text-blue-300 mb-3">
             Vous pourriez également :
           </h3>

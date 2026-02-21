@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { removeTravelPlan, scheduleEmailReminder } from '../features/travelPlans/travelPlansSlice';
+import { addNotification } from '../features/notifications/notificationsSlice';
 
 /**
  * Carte affichant un plan de voyage planifié
@@ -70,6 +71,12 @@ const TravelPlanCard = ({ plan }) => {
   const handleDelete = () => {
     if (window.confirm(`Supprimer le voyage à ${plan.cityName} ?`)) {
       dispatch(removeTravelPlan(plan.id));
+      dispatch(
+        addNotification({
+          message: `Voyage a ${plan.cityName} supprime.`,
+          type: 'error',
+        })
+      );
     }
   };
 
@@ -90,7 +97,7 @@ const TravelPlanCard = ({ plan }) => {
   const isPastTrip = getDaysUntilTravel() < 0;
 
   return (
-    <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-700 hover:shadow-lg dark:hover:shadow-gray-600 transition-shadow overflow-hidden ${isPastTrip ? 'opacity-60' : ''}`}>
+    <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-700 hover:shadow-lg dark:hover:shadow-gray-600 overflow-hidden ${isPastTrip ? 'opacity-60' : ''}`}>
       {/* En-tête avec gradient */}
       <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4">
         <div className="flex justify-between items-start">
@@ -108,7 +115,7 @@ const TravelPlanCard = ({ plan }) => {
       <div className="p-4 space-y-3">
         {/* Informations météo */}
         {plan.weatherInfo && (
-          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 transition-colors">
+          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
             <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">🌤️ Météo prévue</h4>
             <div className="grid grid-cols-2 gap-2 text-sm">
               <div>
@@ -157,7 +164,7 @@ const TravelPlanCard = ({ plan }) => {
           {!isPastTrip && plan.userEmail && (
             <button
               onClick={handleResendEmail}
-              className="flex-1 px-3 py-2 text-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-30 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900 dark:hover:bg-opacity-50 transition font-medium"
+              className="flex-1 px-3 py-2 text-sm bg-blue-50 dark:bg-blue-900 dark:bg-opacity-30 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900 dark:hover:bg-opacity-50 font-medium"
               title="Renvoyer l'email de rappel"
             >
               📧 Renvoyer
@@ -165,7 +172,7 @@ const TravelPlanCard = ({ plan }) => {
           )}
           <button
             onClick={handleDelete}
-            className="flex-1 px-3 py-2 text-sm bg-red-50 dark:bg-red-900 dark:bg-opacity-30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-100 dark:hover:bg-red-900 dark:hover:bg-red-opacity-50 transition font-medium"
+            className="flex-1 px-3 py-2 text-sm bg-red-50 dark:bg-red-900 dark:bg-opacity-30 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-100 dark:hover:bg-red-900 dark:hover:bg-red-opacity-50 font-medium"
           >
             🗑️ Supprimer
           </button>

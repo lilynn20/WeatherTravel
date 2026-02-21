@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTravelPlan, scheduleEmailReminder, resetEmailStatus } from '../features/travelPlans/travelPlansSlice';
 import { addCity, selectIsFavorite } from '../features/favorites/favoritesSlice';
+import { addNotification } from '../features/notifications/notificationsSlice';
 
 /**
  * Modal pour planifier un voyage avec date et email de rappel
@@ -104,6 +105,11 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
         windSpeed: cityData.weather?.windSpeed || 0,
       };
       dispatch(addCity(cityDataForFavorites));
+      dispatch(
+        addNotification({
+          message: `${cityData.name} ajoutée aux destinations avec succès.`,
+        })
+      );
     }
 
     // Créer le plan de voyage
@@ -124,6 +130,11 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
     // Ajouter au store
     const action = dispatch(addTravelPlan(travelPlan));
     const planId = action.payload.id;
+    dispatch(
+      addNotification({
+        message: `Voyage planifié pour ${cityData.name}.`,
+      })
+    );
 
     // Envoyer l'email de rappel si demandé
     if (formData.sendReminder) {
@@ -155,7 +166,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto transition-colors">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
         {/* En-tête */}
         <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-t-lg">
           <div className="flex justify-between items-start">
@@ -165,7 +176,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
             </div>
             <button
               onClick={handleClose}
-              className="text-white hover:text-gray-200 transition-colors"
+              className="text-white hover:text-gray-200"
               aria-label="Fermer"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -179,7 +190,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
           {/* Message de succès */}
           {showSuccess && (
-            <div className="bg-green-50 dark:bg-green-900 dark:bg-opacity-20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-300 px-4 py-3 rounded-lg flex items-center transition-colors">
+            <div className="bg-green-50 dark:bg-green-900 dark:bg-opacity-20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-300 px-4 py-3 rounded-lg flex items-center">
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
@@ -191,7 +202,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
 
           {/* Message d'erreur */}
           {error && (
-            <div className="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300 px-4 py-3 rounded-lg transition-colors">
+            <div className="bg-red-50 dark:bg-red-900 dark:bg-opacity-20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300 px-4 py-3 rounded-lg">
               <p className="text-sm">{error}</p>
             </div>
           )}
@@ -209,7 +220,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
               onChange={handleChange}
               min={getMinDate()}
               max={getMaxDate()}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
                 formErrors.travelDate ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
               }`}
               required
@@ -220,7 +231,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
           </div>
 
           {/* Checkbox pour le rappel */}
-          <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-4 rounded-lg transition-colors">
+          <div className="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 p-4 rounded-lg">
             <label className="flex items-start cursor-pointer">
               <input
                 type="checkbox"
@@ -253,7 +264,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
                 value={formData.userEmail}
                 onChange={handleChange}
                 placeholder="exemple@email.com"
-                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
                   formErrors.userEmail ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                 }`}
                 required={formData.sendReminder}
@@ -269,7 +280,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
 
           {/* Aperçu météo */}
           {cityData.weather && (
-            <div className="bg-gradient-to-r from-blue-50 dark:from-blue-900 dark:from-opacity-20 to-purple-50 dark:to-purple-900 dark:to-opacity-20 p-4 rounded-lg border border-blue-100 dark:border-blue-800 transition-colors">
+            <div className="bg-gradient-to-r from-blue-50 dark:from-blue-900 dark:from-opacity-20 to-purple-50 dark:to-purple-900 dark:to-opacity-20 p-4 rounded-lg border border-blue-100 dark:border-blue-800">
               <h3 className="text-sm font-semibold text-gray-800 dark:text-white mb-2">🌤️ Météo actuelle</h3>
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div>
@@ -290,7 +301,7 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
 
           {/* Info sur l'ajout automatique aux favoris */}
           {!isFavorite && (
-            <div className="bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3 transition-colors">
+            <div className="bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
               <p className="text-xs text-yellow-800 dark:text-yellow-300">
                 ⭐ Cette ville sera automatiquement ajoutée à vos destinations favorites
               </p>
@@ -302,14 +313,14 @@ const TravelDateModal = ({ isOpen, onClose, cityData }) => {
             <button
               type="button"
               onClick={handleClose}
-              className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-medium"
+              className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 font-medium"
               disabled={emailSending}
             >
               Annuler
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              className="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               disabled={emailSending || showSuccess}
             >
               {emailSending ? (

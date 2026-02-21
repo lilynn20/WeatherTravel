@@ -38,7 +38,7 @@ Application React moderne permettant de planifier des voyages en fonction des co
 - **Page 404** : Page d'erreur personnalisée
 - **Navigation** : React Router avec 4 routes
 
-## 🛠 Technologies utilisées
+## Technologies utilisées
 
 - **React 18** : Bibliothèque UI avec hooks
 - **Redux Toolkit** : Gestion d'état centralisée avec slices et async thunks
@@ -163,7 +163,7 @@ weathertravel/
 - Épingler la ville si elle ne l'est pas déjà
 -  Planifier un voyage depuis cette page
 
-## 🔧 Gestion d'état Redux
+## Gestion d'état Redux
 
 ### Slices Redux
 
@@ -310,7 +310,7 @@ Types d'erreurs gérées :
 
 Ce projet est créé dans un cadre pédagogique.
 
-## 👨Auteur
+## Auteur
 
 Projet WeatherTravel v2.0 - Application React avec Redux Toolkit et EmailJS
 

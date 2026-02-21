@@ -32,7 +32,7 @@ const CityCard = ({ city, onRemove }) => {
   };
 
   return (
-    <div className="card hover:scale-105 transition-transform">
+    <div className="card hover:scale-105">
       {/* En-tête avec ville et pays */}
       <div className="flex justify-between items-start mb-4">
         <div className="flex-1">
@@ -83,7 +83,7 @@ const CityCard = ({ city, onRemove }) => {
           📊 Détails
         </button>
         <button
-          onClick={() => onRemove(city.id)}
+          onClick={() => onRemove(city)}
           className="btn-danger text-sm"
         >
           🗑️

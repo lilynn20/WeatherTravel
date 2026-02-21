@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,27 +9,69 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import CityDetail from "./pages/CityDetail";
 import NotFound from "./pages/NotFound";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTheme } from "./utils/useTheme.jsx";
+import ToastNotifications from "./components/ToastNotifications";
+import { addNotification } from "./features/notifications/notificationsSlice";
+import { markToastReminderSent } from "./features/travelPlans/travelPlansSlice";
 
 /**
  * Composant App
  * Composant racine avec routing et navigation
  */
 function App() {
+  const dispatch = useDispatch();
   const favoritesCount = useSelector((state) => state.favorites.cities.length);
+  const travelPlans = useSelector((state) => state.travelPlans.plans);
   const { isDark, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    const checkTravelReminders = () => {
+      const now = new Date();
+
+      travelPlans.forEach((plan) => {
+        const toastSent = plan.toastReminderSent === true;
+        if (toastSent || !plan.travelDate) return;
+
+        const travelDate = new Date(`${plan.travelDate}T00:00:00`);
+        if (Number.isNaN(travelDate.getTime())) return;
+
+        const msUntilTravel = travelDate.getTime() - now.getTime();
+        const dayBeforeMs = 24 * 60 * 60 * 1000;
+
+        if (msUntilTravel > 0 && msUntilTravel <= dayBeforeMs) {
+          dispatch(
+            addNotification({
+              message: `Rappel: voyage a ${plan.cityName} demain.`,
+              type: 'info',
+              duration: 0,
+              persist: true,
+              position: 'bottom',
+              linkTo: `/city/${plan.cityName}`,
+            })
+          );
+          dispatch(markToastReminderSent(plan.id));
+        }
+      });
+    };
+
+    checkTravelReminders();
+    const intervalId = setInterval(checkTravelReminders, 10 * 60 * 1000);
+
+    return () => clearInterval(intervalId);
+  }, [dispatch, travelPlans]);
 
   return (
     <Router>
+      <ToastNotifications />
       {/* Navigation */}
-      <nav className="bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700 sticky top-0 z-50 transition-colors">
+      <nav className="bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <NavLink
               to="/"
-              className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white hover:text-primary transition-colors"
+              className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white hover:text-primary"
             >
               <span className="text-2xl"></span>
               WeatherTravel
@@ -41,7 +83,7 @@ function App() {
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    `flex items-center gap-2 font-medium transition-colors ${
+                    `flex items-center gap-2 font-medium ${
                       isActive
                         ? "text-primary border-b-2 border-primary"
                         : "text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-blue-400"
@@ -54,7 +96,7 @@ function App() {
                 <NavLink
                   to="/dashboard"
                   className={({ isActive }) =>
-                    `flex items-center gap-2 font-medium transition-colors ${
+                    `flex items-center gap-2 font-medium ${
                       isActive
                         ? "text-primary border-b-2 border-primary"
                         : "text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-blue-400"
@@ -75,7 +117,7 @@ function App() {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-yellow-400 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300 text-xl cursor-pointer"
+                className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-yellow-400 hover:bg-gray-300 dark:hover:bg-gray-600 text-xl cursor-pointer"
                 aria-label="Toggle theme"
                 title={isDark ? "Basculer en mode clair" : "Basculer en mode sombre"}
               >
@@ -95,7 +137,7 @@ function App() {
       </Routes>
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12 transition-colors">
+      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-gray-600 dark:text-gray-400 text-sm">
@@ -106,7 +148,7 @@ function App() {
                 href="https://openweathermap.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-primary dark:hover:text-blue-400 transition-colors"
+                className="hover:text-primary dark:hover:text-blue-400"
               >
                 Propulsé par OpenWeatherMap
               </a>

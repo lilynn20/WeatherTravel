@@ -5,6 +5,7 @@ import CityCard from '../components/CityCard';
 import TravelPlanCard from '../components/TravelPlanCard';
 import { removeCity, clearAllFavorites } from '../features/favorites/favoritesSlice';
 import { clearAllPlans } from '../features/travelPlans/travelPlansSlice';
+import { addNotification } from '../features/notifications/notificationsSlice';
 
 /**
  * Page Dashboard
@@ -34,8 +35,14 @@ const Dashboard = () => {
   /**
    * Supprime une ville des favoris
    */
-  const handleRemoveCity = (cityId) => {
-    dispatch(removeCity(cityId));
+  const handleRemoveCity = (city) => {
+    dispatch(removeCity(city.id));
+    dispatch(
+      addNotification({
+        message: `${city.name} supprimee des destinations.`,
+        type: 'error',
+      })
+    );
   };
 
   /**
@@ -45,8 +52,20 @@ const Dashboard = () => {
     if (showConfirmDelete) {
       if (activeTab === 'favorites') {
         dispatch(clearAllFavorites());
+        dispatch(
+          addNotification({
+            message: 'Toutes les destinations ont ete supprimees.',
+            type: 'error',
+          })
+        );
       } else {
         dispatch(clearAllPlans());
+        dispatch(
+          addNotification({
+            message: 'Tous les voyages planifies ont ete supprimes.',
+            type: 'error',
+          })
+        );
       }
       setShowConfirmDelete(false);
     } else {
@@ -64,7 +83,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen py-8 px-4 transition-colors">
+    <div className="min-h-screen py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* En-tête */}
         <div className="mb-8">
@@ -91,7 +110,7 @@ const Dashboard = () => {
           <div className="flex gap-4 border-b border-gray-200 dark:border-gray-700 mb-6">
             <button
               onClick={() => setActiveTab('favorites')}
-              className={`px-4 py-3 font-medium transition-colors relative ${
+              className={`px-4 py-3 font-medium relative ${
                 activeTab === 'favorites'
                   ? 'text-blue-600 dark:text-blue-400'
                   : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300'
@@ -104,7 +123,7 @@ const Dashboard = () => {
             </button>
             <button
               onClick={() => setActiveTab('plans')}
-              className={`px-4 py-3 font-medium transition-colors relative ${
+              className={`px-4 py-3 font-medium relative ${
                 activeTab === 'plans'
                   ? 'text-blue-600 dark:text-blue-400'
                   : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300'
@@ -263,7 +282,7 @@ const Dashboard = () => {
         {/* Conseils */}
         {((activeTab === 'favorites' && favorites.length > 0) || 
           (activeTab === 'plans' && travelPlans.length > 0)) && (
-          <div className="mt-12 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 transition-colors">
+          <div className="mt-12 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
             <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-2 flex items-center gap-2">
               💡 Conseil {activeTab === 'favorites' ? 'de voyage' : 'pour vos voyages'}
             </h4>
