@@ -49,7 +49,7 @@ Application React moderne permettant de planifier des voyages en fonction des co
 - **EmailJS** : Service d'envoi d'emails (gratuit)
 - **OpenWeatherMap API** : Données météo en temps réel
 
-## 📦 Installation
+## Installation
 
 ### Prérequis
 
@@ -125,13 +125,13 @@ weathertravel/
 └── README.md                           # Ce fichier
 ```
 
-## 🎯 Utilisation
+##  Utilisation
 
 ### 1. Page d'accueil (Recherche)
 - Entrer le nom d'une ville dans le formulaire
 - Ou utiliser le bouton "Utiliser ma position" pour la géolocalisation
 - Voir la météo actuelle affichée
-- **Cliquer sur "✈️ Planifier un voyage"** pour ajouter une date et recevoir un rappel
+- **Cliquer sur " Planifier un voyage"** pour ajouter une date et recevoir un rappel
 - Cliquer sur "Épingler cette ville" pour l'ajouter aux favoris
 
 ### 2. Planification de voyage
@@ -208,7 +208,7 @@ Actions :
 Actions asynchrones :
 - `scheduleEmailReminder(params)` : Envoie un email de rappel via EmailJS
 
-## 📧 Service Email (EmailJS)
+## Service Email (EmailJS)
 
 ### Configuration requise
 1. Compte EmailJS gratuit (100 emails/mois)
@@ -228,10 +228,10 @@ dispatch(scheduleEmailReminder({ ... }))
 emailService.sendTravelReminder({ ... })
 
 // 4. Email reçu avec météo et conseils
-✉️ Template professionnel personnalisé
+Template professionnel personnalisé
 ```
 
-## 📝 Validation du formulaire
+## Validation du formulaire
 
 Le formulaire de planification implémente :
 
@@ -241,7 +241,7 @@ Le formulaire de planification implémente :
 4. **Feedback visuel** : Messages d'erreur en temps réel
 5. **État désactivé** : Pendant l'envoi de l'email
 
-## 🎨 Design et UX
+## Design et UX
 
 - **Design responsive** : S'adapte à tous les écrans (mobile, tablette, desktop)
 - **Animations** : Transitions fluides et spinners de chargement
@@ -253,7 +253,7 @@ Le formulaire de planification implémente :
 - **Onglets dashboard** : Organisation claire des contenus
 - **Badges de statut** : Compte à rebours visuel pour chaque voyage
 
-## 📄 Gestion des états asynchrones
+## Gestion des états asynchrones
 
 Chaque requête API passe par 3 états :
 1. **Pending** : Affichage du loader
@@ -269,7 +269,7 @@ Les emails suivent le même pattern avec feedback utilisateur.
 - Sauvegarde automatique à chaque modification
 - Chargement au démarrage de l'application
 
-## ⚠️ Gestion des erreurs
+## Gestion des erreurs
 
 Types d'erreurs gérées :
 - **CITY_NOT_FOUND** : Ville introuvable (404)
@@ -280,7 +280,7 @@ Types d'erreurs gérées :
 - **INVALID_DATE** : Date invalide ou passée
 - **GENERIC_ERROR** : Erreurs génériques
 
-## 📊 Métriques du projet
+## Métriques du projet
 
 **Statistiques v2.0** :
 - **~3500 lignes** de code (+1000)
@@ -298,25 +298,19 @@ Types d'erreurs gérées :
 - Vite 5
 -  EmailJS 3.11
 
-## 📚 Documentation
 
-- **[EMAIL_SETUP.md](./EMAIL_SETUP.md)** : Guide complet configuration email
-- **[DEMARRAGE_RAPIDE.md](./DEMARRAGE_RAPIDE.md)** : Installation rapide
-- **[RAPPORT.md](./RAPPORT.md)** : Rapport technique détaillé
-- **[SOUTENANCE.md](./SOUTENANCE.md)** : Support de présentation
-
-## 🐛 Dépannage
+## Dépannage
 
 ### Email non reçu
 ➡️ Vérifiez vos spams
 ➡️ Vérifiez la configuration EmailJS
 ➡️ Consultez la console navigateur pour les erreurs
 
-## 📄 Licence
+## Licence
 
 Ce projet est créé dans un cadre pédagogique.
 
-## 👨‍💻 Auteur
+## 👨Auteur
 
 Projet WeatherTravel v2.0 - Application React avec Redux Toolkit et EmailJS
 
