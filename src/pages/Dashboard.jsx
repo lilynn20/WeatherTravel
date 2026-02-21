@@ -273,7 +273,7 @@ const Dashboard = () => {
                 : 'Vérifiez la météo quelques jours avant votre départ pour ajuster vos bagages. Les prévisions peuvent évoluer !'}
             </p>
           </div>
-        )}}
+        )}
       </div>
     </div>
   );
